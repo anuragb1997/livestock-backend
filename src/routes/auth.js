@@ -7,6 +7,8 @@ const {
   logout,
   getAnimal,
   sendAnimal,
+  getExpense,
+  sendExpense,
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -20,7 +22,11 @@ router.get('/protected', userAuth, protected)
 router.post('/register', registerValidation, validationMiddleware, register)
 router.post('/login', loginValidation, validationMiddleware, login)
 router.get('/logout', logout)
+//ROUTES FOR THE ANIMAL TABLE
 router.get('/get-animals',getAnimal)
 router.post('/animals',sendAnimal)
 
+//ROUTES FOR THE EXPENSE TABLE
+router.get('/get-expenses',getExpense)
+router.post('/expenses',sendExpense)
 module.exports = router

@@ -124,5 +124,44 @@ exports.sendAnimal = async (req, res) => {
     })
   }
 }
- 
+
+// INSERTING DATA INTO THE EXPENSES TABLE
+exports.sendExpense = async (req, res) => {
+  const {discription ,amount , user_id } = req.body
+  try {
+   
+
+    await db.query('insert into expenses(discription ,amount , user_id ) values ($1 , $2, $3)', [
+      discription ,
+      amount , 
+      user_id ,
+    ])
+
+    return res.status(201).json({
+      success: true,
+      message: 'The registraion was succefull',
+    })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      error: error.message,
+    })
+  }
+}
+
+// GETTING DATA FROM EXPENSES TABLE
+
+exports.getExpense = async (req, res) => {
+  try {
+    const { rows } = await db.query('select  expense_id,description ,amount from expenses')
+
+    return res.status(200).json({
+      success: true,
+      users: rows,
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
   
