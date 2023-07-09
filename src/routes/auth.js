@@ -29,4 +29,6 @@ router.post('/animals',sendAnimal)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
+
+
 module.exports = router

@@ -153,7 +153,7 @@ exports.sendExpense = async (req, res) => {
 
 exports.getExpense = async (req, res) => {
   try {
-    const { rows } = await db.query('select  expense_id,description ,amount from expenses')
+    const { rows } = await db.query('select  expense_id,discription ,amount from expenses')
 
     return res.status(200).json({
       success: true,
