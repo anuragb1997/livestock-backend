@@ -11,6 +11,7 @@ const {
   sendExpense,
   getAnimals,
   geta,
+  updateAnimal,
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -28,7 +29,7 @@ router.get('/logout', logout)
 router.get('/get-animals',getAnimals)
 router.get('/get-animal/:id',getAnimal)
 router.post('/animals',sendAnimal)
-
+router.put('/get-animal/:id',updateAnimal)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
