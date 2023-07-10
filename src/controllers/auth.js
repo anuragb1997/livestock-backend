@@ -86,18 +86,6 @@ exports.logout = async (req, res) => {
 }
 
 
-exports.getAnimal = async (req, res) => {
-  try {
-    const { rows } = await db.query('select  aid, name, breed, type, sex, status, weight, ev, color, height, age, shed_no, date from animals')
-
-    return res.status(200).json({
-      success: true,
-      users: rows,
-    })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
 
 exports.getAnimals = async (req, res) => {
   try {
@@ -114,13 +102,13 @@ exports.getAnimals = async (req, res) => {
 
 exports.getAnimal = async (req, res) => {
   try {
-    const {id}=req.params;
+    const {id}=req.params
 
     const { rows } = await db.query('select  aid, name, breed, type, sex, status, weight, ev, color, height, age, shed_no, date from animals where aid= $1',[id])
 
     return res.status(200).json({
       success: true,
-      users: rows[0],
+      users: rows,
     })
   } catch (error) {
     console.log(error.message)
