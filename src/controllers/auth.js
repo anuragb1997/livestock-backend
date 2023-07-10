@@ -121,13 +121,8 @@ exports.updateAnimal = async (req, res) => {
   const { id } = req.params;
   const { name, breed, type, sex, status, weight, ev, color, height, age, shed_no } = req.body;
   
-  try {
-    const query = `UPDATE animals SET name = $2, breed = $3, type = $4, sex = $5, status = $6, weight = $7, ev = $8, color = $9, height = $10, age = $11, shed_no = $12 WHERE aid = $1
-      RETURNING *;
-    `;
-    const values = [id, name, breed, type, sex, status, weight, ev, color, height, age, shed_no];
-    
-    const result = await pool.query(query, values);
+  try {    
+    const result = await pool.query(`UPDATE animals SET name = $2, breed = $3, type = $4, sex = $5, status = $6, weight = $7, ev = $8, color = $9, height = $10, age = $11, shed_no = $12 WHERE aid = $1 RETURNING *`, [id, name, breed, type, sex, status, weight, ev, color, height, age, shed_no])
     res.json(result.rows[0]);
   } catch (error) {
     console.log(error.message)
