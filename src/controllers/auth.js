@@ -88,7 +88,7 @@ exports.logout = async (req, res) => {
 
 exports.getAnimal = async (req, res) => {
   try {
-    const { rows } = await db.query('select  animal_id,animal_name ,tag_no , breed , statu , shed , p_date , user_id from animals')
+    const { rows } = await db.query('select  aid,name,breed,type,sex,status,weight,ev,color,height,age,shed_no,date from animals')
 
     return res.status(200).json({
       success: true,
