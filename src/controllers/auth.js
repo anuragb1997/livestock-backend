@@ -130,8 +130,7 @@ exports.updateAnimal = async (req, res) => {
     const result = await pool.query(query, values);
     res.json(result.rows[0]);
   } catch (error) {
-    console.error('Error updating animal:', error);
-    res.status(500).json({ error: 'An error occurred while updating the animal.' });
+    console.log(error.message)
   }
 }
 
