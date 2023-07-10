@@ -118,36 +118,23 @@ exports.getAnimal = async (req, res) => {
 //UPDATE THE ANIMAL 
 
 exports.updateAnimal = async (req, res) => {
+  const { id } = req.params;
+  const { name, breed, type, sex, status, weight, ev, color, height, age, shed_no } = req.body;
+  
   try {
-    const {  aid, name , breed , 
-      type , sex , status , 
-      weight , ev , color ,
-      height, age , shed_no ,
-      } = req.body
-    const {id}=req.params
-
-    const { rows } = await db.query('update animals set  aid=$1, name=$2, breed=$3, type=$4, sex=$5, status=$6, weight=$7, ev=$8, color=$9, height=$10, age=$11, shed_no=$12, from animals where aid= $13',[
-      aid,
-      name,
-      breed,
-      type,
-      sex,
-      status,
-      weight,
-      ev,
-      color,
-      height,
-      age,
-      shed_no,
-      id])
-    return res.status(200).json({
-      success: true,
-      users: rows,
-    })
+    const query = `UPDATE animals SET name = $2, breed = $3, type = $4, sex = $5, status = $6, weight = $7, ev = $8, color = $9, height = $10, age = $11, shed_no = $12 WHERE id = $1
+      RETURNING *;
+    `;
+    const values = [aid, name, breed, type, sex, status, weight, ev, color, height, age, shed_no];
+    
+    const result = await pool.query(query, values);
+    res.json(result.rows[0]);
   } catch (error) {
-    console.log(error.message)
+    console.error('Error updating animal:', error);
+    res.status(500).json({ error: 'An error occurred while updating the animal.' });
   }
 }
+
 
 
 exports.sendAnimal = async (req, res) => {
