@@ -127,18 +127,18 @@ exports.updateAnimal = async (req, res) => {
     const {id}=req.params
 
     const { rows } = await db.query('update animals set  aid=$1, name=$2, breed=$3, type=$4, sex=$5, status=$6, weight=$7, ev=$8, color=$9, height=$10, age=$11, shed_no=$12, from animals where aid= $13',[
-      req.body.aid,
-      req.body.name,
-      req.body.breed,
-      req.body.type,
-      req.body.sex,
-      req.body.status,
-      req.body.weight,
-      req.body.ev,
-      req.body.color,
-      req.body.height,
-      req.body.age,
-      req.body.shed_no,
+      aid,
+      name,
+      breed,
+      type,
+      sex,
+      status,
+      weight,
+      ev,
+      color,
+      height,
+      age,
+      shed_no,
       id])
     return res.status(200).json({
       success: true,
