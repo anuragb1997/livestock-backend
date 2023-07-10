@@ -100,17 +100,26 @@ exports.getAnimal = async (req, res) => {
 }
 
 exports.sendAnimal = async (req, res) => {
-  const { animal_name ,tag_no , breed , statu, shed, user_id } = req.body
+  const {  name , breed , 
+    type , sex , status , 
+    weight , ev , color ,
+    height, age , shed_no ,
+    } = req.body
   try {
    
 
-    await db.query('insert into animals(animal_name ,tag_no , breed , statu, shed, user_id) values ($1 , $2, $3, $4, $5, $6)', [
-      animal_name ,
-      tag_no , 
-      breed ,
-      statu, 
-      shed, 
-      user_id,
+    await db.query('insert into animals(name , breed , type , sex , status , weight , ev , color ,height, age , shed_no ) values ($1 , $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [
+      name , 
+      breed , 
+      type , 
+      sex , 
+      status , 
+      weight ,
+       ev , 
+       color ,
+       height, 
+       age , 
+       shed_no 
     ])
 
     return res.status(201).json({

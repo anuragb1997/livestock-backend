@@ -18,6 +18,22 @@ create table animals(
   foreign key(user_id) references users(user_id)
 );
 
+create table animals(
+aid serial primary key,
+name varchar(255),
+breed varchar(255),
+type varchar(255),
+sex varchar(255),
+status varchar(255),
+weight int,
+ev int,
+color varchar(255),
+height int,
+age int,
+shed_no int,
+date date default current_date, 
+foreign key(user_id) references users(user_id))
+
 create table foods(
   food_id serial,
   food_name varchar(255) not null,
