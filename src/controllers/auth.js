@@ -85,6 +85,29 @@ exports.logout = async (req, res) => {
   }
 }
 
+//INSERT INTO SHED
+
+exports.insertShed = async (req, res) => {
+  const {  shed_id , shed_name  } = req.body
+  try {
+   
+
+    await db.query('insert into animals(shed_id , shed_name ) values ($1 , $2)', [
+      shed_id , shed_name
+    ])
+
+    return res.status(201).json({
+      success: true,
+      message: 'The registraion was succefull',
+    })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      error: error.message,
+    })
+  }
+}
+
 
 
 exports.getAnimals = async (req, res) => {
