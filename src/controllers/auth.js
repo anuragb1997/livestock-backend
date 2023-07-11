@@ -108,6 +108,18 @@ exports.insertShed = async (req, res) => {
   }
 }
 
+exports.getsheds = async (req, res) => {
+  try {
+    const { rows } = await db.query('select  shed_id, shed_name from shed')
+
+    return res.status(200).json({
+      success: true,
+      users: rows,
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 
 exports.getAnimals = async (req, res) => {

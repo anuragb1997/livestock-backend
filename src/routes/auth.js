@@ -13,6 +13,7 @@ const {
   geta,
   updateAnimal,
   insertShed,
+  getsheds,
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -24,6 +25,7 @@ const router = Router()
 //routes for shed 
 
 router.post('/sheds',insertShed)
+router.get('/get-shed',getsheds)
 
 router.get('/get-users', getUsers)
 router.get('/protected', userAuth, protected)
