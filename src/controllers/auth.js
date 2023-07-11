@@ -92,7 +92,7 @@ exports.insertShed = async (req, res) => {
   try {
    
 
-    await db.query('insert into animals(shed_id , shed_name ) values ($1 , $2)', [
+    await db.query('insert into shed(shed_id , shed_name ) values ($1 , $2)', [
       shed_id , shed_name
     ])
 
