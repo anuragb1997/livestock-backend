@@ -18,6 +18,13 @@ create table animals(
   foreign key(user_id) references users(user_id)
 );
 
+create table shed(
+  shed_id serial primary key,
+  shed_name varchar(255),
+  
+  )
+
+
 create table animals(
 aid serial primary key,
 name varchar(255),
@@ -31,37 +38,41 @@ color varchar(255),
 height int,
 age int,
 shed_no int,
+user_id int,
 date date default current_date, 
-foreign key(user_id) references users(user_id))
+foreign key(user_id) references users(user_id),
+foreign key(shed_no) references shed(shed_id)
+)
+
+
 
 create table foods(
   food_id serial,
   food_name varchar(255) not null,
-  quantity varchar(255) not null,
-  shed int not null,
-  user_id int,animal_id int,
-  f_date date default current_date,
+  user_id int,
   primary key(food_id),
-  foreign key(user_id)references users(user_id),
-  foreign key(animal_id) references animals(animal_id)
-);
+  foreign key(user_id)references users(user_id)
+  )
 
+create table eat(
+  food_id int,
+  shed_id int,
+  foreign key(food_id) references foods(food_id),
+  foreign key(shed_id) references shed(shed_id)
+)
 create table doctors(
   doctor_id serial primary key,
   doctor_name varchar(255) not null,
   contact int,
-  user_id int , 
   foreign key(user_id) references users(user_id)
 );
 
 create table vaccine_infos(
-  animal_id int,
+  aid int,
   doctor_id int,
   vaccine_name varchar(255) not null,
-  user_id int,
   vaccine_date date default current_date,
-  primary key(animal_id,doctor_id),
-  foreign key(animal_id) references animals(animal_id),
+  foreign key(aid) references animals(aid),
   foreign key(doctor_id) references doctors(doctor_id)
 );
 
@@ -73,18 +84,11 @@ create table expenses(
   foreign key(user_id) references users(user_id)
 );
 
-create table weights(
-  weight_id serial primary key,
-  animal_weight int not null,
-  user_id int ,
-  foreign key(user_id) references users(user_id)
-);
 
 
 create table animal_weight(
-  animal_id int,
-  weight_id int,
-  primary key(animal_id,weight_id),
-  foreign key(animal_id) references animals(animal_id),
-  foreign key(user_id) references users(user_id)
-)
+  weight_id serial primary key,
+  aid int,
+  weight int,
+  weight_date date default current_date,
+  foreign key(aid) references animals(aid))
