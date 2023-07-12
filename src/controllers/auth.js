@@ -210,9 +210,10 @@ exports.sendExpense = async (req, res) => {
   try {
    
 
-    await db.query('insert into expenses(discription ,amount , user_id ) values ($1 , $2, $3 )', [
+    await db.query('insert into expenses(discription ,income ,expense, user_id ) values ($1 , $2, $3, $4 )', [
       discription ,
-      amount , 
+      income ,
+      expense, 
       user_id ,
     ])
 
