@@ -210,9 +210,10 @@ exports.sendExpense = async (req, res) => {
   try {
    
 
-    await db.query('insert into expenses(discription ,amount , user_id ) values ($1 , $2, $3)', [
+    await db.query('insert into expenses(discription ,income,expense , user_id ) values ($1 , $2, $3 ,$4)', [
       discription ,
-      amount , 
+      income ,
+      expense , 
       user_id ,
     ])
 
@@ -232,7 +233,7 @@ exports.sendExpense = async (req, res) => {
 
 exports.getExpense = async (req, res) => {
   try {
-    const { rows } = await db.query('select  expense_id,discription ,amount from expenses')
+    const { rows } = await db.query('select  expense_id,discription ,income, expense from expenses')
 
     return res.status(200).json({
       success: true,
