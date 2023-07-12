@@ -79,8 +79,7 @@ create table vaccine_infos(
 create table expenses(
   expense_id serial primary key,
   discription varchar(255),
-  expense int ,
-  income int,
+  amount int not null,
   user_id int,
   foreign key(user_id) references users(user_id)
 );
