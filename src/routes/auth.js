@@ -37,6 +37,7 @@ router.get('/get-animals',getAnimals)
 router.get('/get-animal/:id',getAnimal)
 router.post('/animals',sendAnimal)
 router.put('/get-animal/:id',updateAnimal)
+router.delete('/animal/:id',deleteAniml)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
