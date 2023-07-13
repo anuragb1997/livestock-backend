@@ -169,7 +169,7 @@ exports.updateAnimal = async (req, res) => {
 
 //Delete teh animal
 
-exports.getAnimal = async (req, res) => {
+exports.deleteAnimal = async (req, res) => {
   try {
     const {id}=req.params
 

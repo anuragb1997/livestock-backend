@@ -14,6 +14,7 @@ const {
   updateAnimal,
   insertShed,
   getsheds,
+  deleteAnimal,
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -37,7 +38,7 @@ router.get('/get-animals',getAnimals)
 router.get('/get-animal/:id',getAnimal)
 router.post('/animals',sendAnimal)
 router.put('/get-animal/:id',updateAnimal)
-router.delete('/animal/:id',deleteAniml)
+router.delete('/animal/:id',deleteAnimal)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
