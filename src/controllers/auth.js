@@ -157,16 +157,16 @@ exports.updateAnimal = async (req, res) => {
   const { name, breed, type, sex, status, weight, ev, color, height, age, shed_no } = req.body
   
   try {
-    const { aid, name, breed, type, sex, status, ev, color, height, age, shed_no, user_id} = req.body;
+    const { aid, name, breed, type, sex, status,weight, ev, color, height, age, shed_no, user_id, date } = req.body;
 
     const updateAnimalQuery = `
       UPDATE animals 
-      SET name = $1, breed = $2, type = $3, sex = $4, status = $5, weight= $6, ev = $7, color = $8, height = $9, age = $10, shed_no = $11, date = $12 
-      WHERE aid = $13
+      SET name = $1, breed = $2, type = $3, sex = $4, status = $5, weight=$6, ev = $7, color = $8, height = $9, age = $10, shed_no = $11, user_id = $12, date = $13 
+      WHERE aid = $14
       RETURNING *
     `;
 
-    const { rows } = await db.query(updateAnimalQuery, [name, breed, type, sex, status, weight,ev, color, height, age, shed_no, user_id, aid]);
+    const { rows } = await db.query(updateAnimalQuery, [name, breed, type, sex, status, weight, ev, color, height, age, shed_no, user_id, date, aid]);
 
     if (rows.length === 0) {
       return res.status(404).json({
@@ -189,6 +189,7 @@ exports.updateAnimal = async (req, res) => {
     });
   }
 };
+
 //Delete teh animal
 
 exports.deleteAnimal = async (req, res) => {
