@@ -156,17 +156,39 @@ exports.updateAnimal = async (req, res) => {
   const { id } = req.params
   const { name, breed, type, sex, status, weight, ev, color, height, age, shed_no } = req.body
   
-  try {    
-    const result = await pool.query(`UPDATE animals SET name = $2, breed = $3, type = $4, sex = $5, status = $6, weight = $7, ev = $8, color = $9, height = $10, age = $11, shed_no = $12 WHERE aid = $1 RETURNING *`, [id, name, breed, type, sex, status, weight, ev, color, height, age, shed_no])
-    return res.status(201).json({
-      success: true,
-      users: rows,
-    })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
+  try {
+    const { aid, name, breed, type, sex, status, ev, color, height, age, shed_no, user_id, date } = req.body;
 
+    const updateAnimalQuery = `
+      UPDATE animals 
+      SET name = $1, breed = $2, type = $3, sex = $4, status = $5, weight= $6, ev = $7, color = $8, height = $9, age = $10, shed_no = $11, date = $12 
+      WHERE aid = $13
+      RETURNING *
+    `;
+
+    const { rows } = await db.query(updateAnimalQuery, [name, breed, type, sex, status, weight,ev, color, height, age, shed_no, user_id, date, aid]);
+
+    if (rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Animal not found',
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Animal updated successfully',
+      animal: rows[0]
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      success: false,
+      message: 'Server Error',
+    });
+  }
+};
 //Delete teh animal
 
 exports.deleteAnimal = async (req, res) => {
@@ -229,10 +251,9 @@ exports.sendExpense = async (req, res) => {
   try {
    
 
-    await db.query('insert into expenses(discription ,income,expense , user_id ) values ($1 , $2, $3 ,$4)', [
+    await db.query('insert into expenses(discription ,amount , user_id ) values ($1 , $2, $3 )', [
       discription ,
-      income ,
-      expense, 
+      amount , 
       user_id ,
     ])
 
@@ -262,9 +283,5 @@ exports.getExpense = async (req, res) => {
     console.log(error.message)
   }
 }
-
-//INSERT Into the vaccine
-
-
 
   
