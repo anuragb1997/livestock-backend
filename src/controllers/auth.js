@@ -157,7 +157,7 @@ exports.updateAnimal = async (req, res) => {
   const { name, breed, type, sex, status, weight, ev, color, height, age, shed_no } = req.body
   
   try {
-    const { aid, name, breed, type, sex, status, ev, color, height, age, shed_no, user_id, date } = req.body;
+    const { aid, name, breed, type, sex, status, ev, color, height, age, shed_no, user_id} = req.body;
 
     const updateAnimalQuery = `
       UPDATE animals 
@@ -166,7 +166,7 @@ exports.updateAnimal = async (req, res) => {
       RETURNING *
     `;
 
-    const { rows } = await db.query(updateAnimalQuery, [name, breed, type, sex, status, weight,ev, color, height, age, shed_no, user_id, date, aid]);
+    const { rows } = await db.query(updateAnimalQuery, [name, breed, type, sex, status, weight,ev, color, height, age, shed_no, user_id, aid]);
 
     if (rows.length === 0) {
       return res.status(404).json({
