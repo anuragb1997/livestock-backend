@@ -47,4 +47,4 @@ router.delete('/expense',deleteExpense)
 
 
 
-m0odule.exports = router
+module.exports = router
