@@ -285,4 +285,20 @@ exports.getExpense = async (req, res) => {
   }
 }
 
+exports.deleteExpense = async (req, res) => {
+  try {
+    const {id}=req.params
+
+    const { rows } = await db.query('delete from expenses where aid= $1',[id])
+
+    return res.status(200).json({
+      success: true,
+      message: 'Sucessfully deleted',
+      users: rows,
+
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
   

@@ -15,6 +15,7 @@ const {
   insertShed,
   getsheds,
   deleteAnimal,
+  deleteExpense,
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -42,6 +43,8 @@ router.delete('/animal/:id',deleteAnimal)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
+router.delete('/expense',deleteExpense)
 
 
-module.exports = router
+
+m0odule.exports = router
