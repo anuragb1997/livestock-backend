@@ -43,8 +43,7 @@ router.delete('/animal/:id',deleteAnimal)
 //ROUTES FOR THE EXPENSE TABLE
 router.get('/get-expenses',getExpense)
 router.post('/expenses',sendExpense)
-router.delete('/expense/:expense_id',deleteExpense)
-
+router.delete('/expense/:id',deleteExpense)
 
 
 module.exports = router
